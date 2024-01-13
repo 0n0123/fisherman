@@ -24,21 +24,28 @@ label {
 
 button {
     display: block;
-    width: 8rem;
+    padding: 0 1rem;
 }
 
-select, #left {
+#left, #right {
     width: 24rem;
 }
 
-select {
-    height: 15rem;
+#right {
+    min-height: 15rem;
+    max-height: 15rem;
+    border: 1px solid darkgray;
+    overflow: auto;
 }
 
 #left {
     overflow: auto;
     border: 1px solid darkgray;
     height: 28rem;
+}
+
+#left label {
+    width: 100%;
 }
 
 #left>.fish:nth-child(2n) {

@@ -27,7 +27,7 @@ addButton.onclick = _ => {
     const selected = Array.from(leftSelect.getElementsByTagName('input'))
         .filter(input => input.checked);
     for (const opt of selected) {
-        rightSelect.insertAdjacentHTML('afterbegin', `<option value="${opt.value}">${opt.dataset.name}</option>`);
+        rightSelect.insertAdjacentHTML('afterbegin', `<div data-value="${opt.value}">${opt.dataset.name}</div>`);
         opt.checked = false;
     }
     showAmount();
@@ -42,7 +42,7 @@ const bellLabel = document.getElementById('bell');
 const justinLabel = document.getElementById('justin');
 
 function showAmount() {
-    const values = Array.from(rightSelect.options).map(opt => parseInt(opt.value));
+    const values = Array.from(rightSelect.children).map(opt => parseInt(opt.dataset.value));
     const total = values.reduce((p, c) => p += c, 0);
     const justin = total * 1.5;
     bellLabel.textContent = total;
