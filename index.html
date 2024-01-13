@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サカナを釣ろう</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="control">
+        <div>
+            <label><input type="checkbox" id="now" checked>今釣れる魚のみ表示</label>
+        </div>
+        <div id="left"></div>
+        <button id="add">➕追加</button>
+        <select id="right" multiple></select>
+        <button id="del">🗑削除</button>
+    </div>
+    <div id="total">
+        <label>合計</label>
+        <label id="bell">0</label>
+        &nbsp;
+        (<label id="justin">0</label>)
+        <label>ベル</label>
+    </div>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
