@@ -5,24 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サカナを釣ろう</title>
     <link rel="stylesheet" href="style.css">
+    <link
+      href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+      rel="stylesheet"
+    />
 </head>
 <body>
-    <div id="control">
-        <div>
-            <label><input type="checkbox" id="now" checked>今釣れる魚のみ表示</label>
-        </div>
-        <div id="left"></div>
-        <button id="add">➕追加</button>
-        <div id="right"></div>
-        <button id="del">🗑削除</button>
+    <div>
+        <label><input type="radio" name="kind" value="fishes" checked>サカナ</label>
+        <label><input type="radio" name="kind" value="seabros">海の幸</label>
+        <label>&nbsp;&nbsp;</label>
+        <label><input type="checkbox" id="now" checked>今いるもののみ</label>
     </div>
-    <div id="total">
-        <label>合計</label>
-        <label id="bell">0</label>
-        &nbsp;
-        (<label id="justin">0</label>)
-        <label>ベル</label>
-    </div>
+    <div id="grid"></div>
+
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
     <script src="script.js" type="module"></script>
 </body>
 </html>

@@ -1,52 +1,33 @@
 import { getAll, getAllOfNow } from "./data.js";
 
+const kindRadios = Array.from(document.getElementsByName('kind'));
 const nowCheckbox = document.getElementById('now');
-nowCheckbox.onchange = _ => showFishes();
-const leftSelect = document.getElementById('left');
-/** @type {HTMLSelectElement} */
-const rightSelect = document.getElementById('right');
+const gridElm = document.getElementById('grid');
+const grid = new gridjs.Grid({
+    columns: ['名前', '値段', '場所'],
+    data: [],
+    fixedHeader: true,
+    height: gridElm.clientHeight + 'px',
+    sort: true
+}).render(gridElm);
 
-function showFishes() {
-    leftSelect.innerHTML = '';
+kindRadios.forEach(el => el.onchange = _ => showItems());
+nowCheckbox.onchange = _ => showItems();
 
-    const fishes = nowCheckbox.checked ? getAllOfNow() : getAll();
-
-    for (const fish of fishes) {
-        leftSelect.insertAdjacentHTML('beforeend', createFishRow(fish));
-    }
+function getSelectedKind() {
+    return kindRadios.find(el => el.checked)?.value ?? 'fishes';
 }
 
-function createFishRow(fish) {
-    return `<div class="fish"><label><input type="checkbox" data-name="${fish.name}" value="${fish.sell}">${fish.name}&nbsp;[${fish.sell}]</label></div>`;
+function getData() {
+    const kind = getSelectedKind();
+    const items = nowCheckbox.checked ? getAllOfNow(kind) : getAll(kind);
+    return items.map(item => [item.name, item.sell, item.location ?? '']);
 }
 
-const addButton = document.getElementById('add');
-const delButton = document.getElementById('del');
-
-addButton.onclick = _ => {
-    const selected = Array.from(leftSelect.getElementsByTagName('input'))
-        .filter(input => input.checked);
-    for (const opt of selected) {
-        rightSelect.insertAdjacentHTML('afterbegin', `<div data-value="${opt.value}">${opt.dataset.name}</div>`);
-        opt.checked = false;
-    }
-    showAmount();
-};
-
-delButton.onclick = _ => {
-    rightSelect.innerHTML = '';
-    showAmount();
-};
-
-const bellLabel = document.getElementById('bell');
-const justinLabel = document.getElementById('justin');
-
-function showAmount() {
-    const values = Array.from(rightSelect.children).map(opt => parseInt(opt.dataset.value));
-    const total = values.reduce((p, c) => p += c, 0);
-    const justin = total * 1.5;
-    bellLabel.textContent = total;
-    justinLabel.textContent = justin;
+function showItems() {
+    grid.updateConfig({
+        data: getData()
+    }).forceRender();
 }
 
-showFishes();
+showItems();
