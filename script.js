@@ -24,10 +24,23 @@ function getData() {
     return items.map(item => [item.name, item.sell, item.location ?? '']);
 }
 
+let showHour;
+
 function showItems() {
+    showHour = new Date().getHours();
     grid.updateConfig({
         data: getData()
     }).forceRender();
 }
 
 showItems();
+
+setInterval(() => {
+    if (!nowCheckbox.checked) {
+        return;    
+    }
+    const hours = new Date().getHours();
+    if (hours !== showHour) {
+        showItems();
+    }
+}, 1000);
