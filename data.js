@@ -5,12 +5,17 @@ export function getAll(kind) {
     return items;
 }
 
-export function getAllOfNow(kind) {
+export function getAllOfNow(kind, weather) {
     const now = new Date();
     const month = now.getMonth();
     const hourIndex = getHourIndex(kind, now);
     const data = DATA[kind];
-    const items = data.filter(item => item.months[month] & item.times[hourIndex]);
+    const items = data.filter(item => {
+        const m = item.months[month] & item.times[hourIndex];
+        const [ sunny, rainy, snowy ] = item.weather ?? [1, 1, 1];
+        const w = { sunny, rainy, snowy }[weather];
+        return m && w;
+    });
     items.sort(sortByName);
     return JSON.parse(JSON.stringify(items));
 }
@@ -529,7 +534,8 @@ const DATA = {
         sell: 15000,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        weather: [0, 1, 0]
     }],
     seabros: [{
         name: 'ワカメ',
@@ -737,73 +743,85 @@ const DATA = {
         sell: 160,
         months: [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
         times: [0, 1, 1, 1, 1, 0],
-        location: '空中'
+        location: '空中',
+        weather: [1, 0, 1]
     }, {
         name: 'モンキチョウ',
         sell: 160,
         months: [0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0],
         times: [0, 1, 1, 1, 1, 0],
-        location: '空中'
+        location: '空中',
+        weather: [1, 0, 1]
     }, {
         name: 'アゲハチョウ',
         sell: 240,
         months: [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
         times: [0, 1, 1, 1, 1, 0],
-        location: '空中'
+        location: '空中',
+        weather: [1, 0, 1]
     }, {
         name: 'カラスアゲハ',
         sell: 2500,
         months: [0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
         times: [0, 1, 1, 1, 1, 0],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'アオスジアゲハ',
         sell: 300,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
         times: [0, 1, 1, 1, 1, 0],
-        location: '空中'
+        location: '空中',
+        weather: [1, 0, 1]
     }, {
         name: 'オオゴマダラ',
         sell: 1000,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [0, 0, 1, 1, 1, 0],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'オオムラサキ',
         sell: 3000,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
         times: [0, 1, 1, 1, 1, 0],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'オオカバマダラ',
         sell: 140,
         months: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
         times: [0, 1, 1, 1, 0, 0],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'モルフォチョウ',
         sell: 4000,
         months: [1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1],
         times: [1, 1, 0, 0, 1, 1],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'ミイロタテハ',
         sell: 3000,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
         times: [0, 0, 1, 1, 0, 0],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'アカエリトリバネアゲハ',
         sell: 2500,
         months: [1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1],
         times: [0, 0, 1, 1, 0, 0],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'アレキサンドラトリバネアゲハ',
         sell: 4000,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
         times: [0, 0, 1, 0, 0, 0],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'ガ',
         sell: 130,
@@ -845,37 +863,43 @@ const DATA = {
         sell: 160,
         months: [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
         times: [0, 0, 1, 1, 0, 0],
-        location: '160'
+        location: '160',
+        weather: [1, 0, 1]
     }, {
         name: 'コオロギ',
         sell: 130,
         months: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
         times: [1, 1, 0, 0, 1, 1],
-        location: '草地など'
+        location: '草地など',
+        weather: [1, 0, 1]
     }, {
         name: 'スズムシ',
         sell: 430,
         months: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
         times: [1, 1, 0, 0, 1, 1],
-        location: '草地など'
+        location: '草地など',
+        weather: [1, 0, 1]
     }, {
         name: 'カマキリ',
         sell: 430,
         months: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         times: [0, 0, 1, 1, 0, 0],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'ハナカマキリ',
         sell: 2400,
         months: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         times: [0, 0, 1, 1, 0, 0],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'ミツバチ',
         sell: 200,
         months: [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
         times: [0, 0, 1, 1, 0, 0],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'ハチ',
         sell: 2500,
@@ -923,31 +947,36 @@ const DATA = {
         sell: 180,
         months: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
         times: [0, 0, 1, 1, 1, 0],
-        location: '空中'
+        location: '空中',
+        weather: [1, 0, 1]
     }, {
         name: 'ギンヤンマ',
         sell: 230,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [0, 0, 1, 1, 0, 0],
-        location: '空中'
+        location: '空中',
+        weather: [1, 0, 1]
     }, {
         name: 'オニヤンマ',
         sell: 4500,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [0, 0, 1, 1, 0, 0],
-        location: '空中'
+        location: '空中',
+        weather: [1, 0, 1]
     }, {
         name: 'イトトンボ',
         sell: 500,
         months: [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
         times: [1, 1, 1, 1, 1, 1],
-        location: '空中'
+        location: '空中',
+        weather: [1, 0, 1]
     }, {
         name: 'ホタル',
         sell: 300,
         months: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
         times: [1, 0, 0, 0, 0, 1],
-        location: '空中'
+        location: '空中',
+        weather: [1, 0, 1]
     }, {
         name: 'オケラ',
         sell: 500,
@@ -977,49 +1006,57 @@ const DATA = {
         sell: 120,
         months: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [1, 1, 1, 1, 1, 1],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'ジンメンカメムシ',
         sell: 1000,
         months: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [1, 1, 0, 0, 0, 1],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'テントウムシ',
         sell: 200,
         months: [0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0],
         times: [0, 0, 1, 1, 0, 0],
-        location: '花'
+        location: '花',
+        weather: [1, 0, 1]
     }, {
         name: 'ハンミョウ',
         sell: 1500,
         months: [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [1, 1, 1, 1, 1, 1],
-        location: '草地など'
+        location: '草地など',
+        weather: [1, 0, 1]
     }, {
         name: 'タマムシ',
         sell: 2400,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
         times: [1, 1, 1, 1, 1, 1],
-        location: '切り株'
+        location: '切り株',
+        weather: [1, 0, 1]
     }, {
         name: 'バイオリンムシ',
         sell: 450,
         months: [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0],
         times: [1, 1, 1, 1, 1, 1],
-        location: '切り株'
+        location: '切り株',
+        weather: [1, 0, 1]
     }, {
         name: 'ゴマダラカミキリ',
         sell: 350,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 1, 1, 1],
-        location: '切り株'
+        location: '切り株',
+        weather: [1, 0, 1]
     }, {
         name: 'ルリボシカミキリ',
         sell: 3000,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 1, 1, 1, 1, 1],
-        location: '切り株'
+        location: '切り株',
+        weather: [1, 0, 1]
     }, {
         name: 'ホウセキゾウムシ',
         sell: 800,
@@ -1169,7 +1206,8 @@ const DATA = {
         sell: 130,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 0, 0, 0, 1, 1],
-        location: '空中'
+        location: '空中',
+        weather: [1, 0, 1]
     }, {
         name: 'ノミ',
         sell: 70,
@@ -1181,7 +1219,8 @@ const DATA = {
         sell: 250,
         months: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         times: [1, 1, 1, 1, 1, 1],
-        location: '岩・低木'
+        location: '岩・低木',
+        weahter: [0, 1, 0]
     }, {
         name: 'ダンゴムシ',
         sell: 250,

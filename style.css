@@ -21,6 +21,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    gap: .5rem;
 }
 
 input[type=checkbox],
@@ -30,6 +31,10 @@ input[type=radio] {
 
 option {
     font-size: 1.6rem;
+}
+
+#time {
+    font-family: monospace;
 }
 
 #grid {
