@@ -46,7 +46,7 @@ const nowCheckbox = new class {
     elm = document.getElementById('now');
     constructor() {
         this.elm.onchange = _ => {
-            if (nowCheckbox.checked) {
+            if (this.elm.checked) {
                 weatherRadios.enable();
             } else {
                 weatherRadios.disable();
