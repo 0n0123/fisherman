@@ -1,23 +1,18 @@
-export function getAll(kind) {
-    const data = DATA[kind];
-    const items = JSON.parse(JSON.stringify(data));
-    items.sort(sortByName);
-    return items;
-}
-
-export function getAllOfNow(kind, weather) {
-    const now = new Date();
-    const month = now.getMonth();
-    const hourIndex = getHourIndex(kind, now);
-    const data = DATA[kind];
-    const items = data.filter(item => {
-        const m = item.months[month] & item.times[hourIndex];
-        const [ sunny, rainy, snowy ] = item.weather ?? [1, 1, 1];
-        const w = { sunny, rainy, snowy }[weather];
-        return m && w;
-    });
-    items.sort(sortByName);
-    return JSON.parse(JSON.stringify(items));
+export function getData(kinds, date, weather) {
+    const month = date.getMonth();
+    const data = [];
+    for (const kind of kinds) {
+        const hourIndex = getHourIndex(kind, date);
+        const items = DATA[kind].filter(item => {
+            const m = item.months[month] & item.times[hourIndex];
+            const [ sunny, rainy, snowy ] = item.weather ?? [1, 1, 1];
+            const w = { sunny, rainy, snowy }[weather];
+            return m && w;
+        });
+        data.push(...items);
+    }
+    data.sort(sortByName);
+    return JSON.parse(JSON.stringify(data));
 }
 
 function sortByName(a, b) {

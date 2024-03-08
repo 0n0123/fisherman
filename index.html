@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サカナを釣ろう</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <link rel="stylesheet" href="style.css">
     <link
       href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
@@ -11,22 +12,41 @@
     />
 </head>
 <body>
-    <div>
-        <label><input type="radio" name="kind" value="fishes" checked>サカナ</label>
-        <label><input type="radio" name="kind" value="seabros">海の幸</label>
-        <label><input type="radio" name="kind" value="bugs">ムシ</label>
-
-        <label>&nbsp;&nbsp;</label>
-        <label><input type="checkbox" id="now" checked>今いるもののみ</label>
+    <div id="grid"></div>
+    <div class="control">
+        <label class="control-kind">種類</label>
+        <label><input type="checkbox" name="kind" value="fishes" checked>サカナ</label>
+        <label><input type="checkbox" name="kind" value="seabros">海の幸</label>
+        <label><input type="checkbox" name="kind" value="bugs">ムシ</label>
     </div>
-    <div>
-        <label id="time"></label>
-        <label>&nbsp;&nbsp;</label>
+    <div class="control">
+        <label class="control-kind">日時</label>
+        <label><input type="checkbox" id="now" checked>現在</label>
+    </div>
+    <div class="control">
+        <label class="control-kind"></label>
+        <select id="month" disabled>
+            <option value="0">1月</option>
+            <option value="1">2月</option>
+            <option value="2">3月</option>
+            <option value="3">4月</option>
+            <option value="4">5月</option>
+            <option value="5">6月</option>
+            <option value="6">7月</option>
+            <option value="7">8月</option>
+            <option value="8">9月</option>
+            <option value="9">10月</option>
+            <option value="10">11月</option>
+            <option value="11">12月</option>
+        </select>
+        <input type="time" id="time" disabled>
+    </div>
+    <div class="control">
+        <label class="control-kind">天気</label>
         <label><input type="radio" name="weather" value="sunny" checked>🌤/⛅</label>
         <label><input type="radio" name="weather" value="rainy">☔</label>
         <label><input type="radio" name="weather" value="snowy">⛄</label>
     </div>
-    <div id="grid"></div>
 
     <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
     <script src="script.js" type="module"></script>

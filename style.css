@@ -7,21 +7,33 @@ html {
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
     font-size: 1.5rem;
 }
 
 body {
-    background-color: ghostwhite;
+    padding: 1rem 1rem 3rem 1rem;
+    margin: 0;
     width: 100%;
     height: 100%;
-    padding: 1.5rem 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap: .5rem;
+    overflow: hidden;
+}
+
+.control {
+    width: 100%;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.control-kind {
+    width: 5rem;
+    font-weight: bold;
 }
 
 input[type=checkbox],
@@ -29,15 +41,15 @@ input[type=radio] {
     margin: 0 .3rem;
 }
 
+#date,
+#time {
+    display: inline-block;
+}
+
 option {
     font-size: 1.6rem;
 }
 
-#time {
-    font-family: monospace;
-}
-
 #grid {
     flex: 1;
-    width: 100%;
 }

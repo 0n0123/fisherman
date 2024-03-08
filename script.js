@@ -1,28 +1,51 @@
-import { getAll, getAllOfNow } from "./data.js";
+import { getData } from "./data.js";
 
-const kindRadios = new class {
+const kindChecks = new class {
     elms = Array.from(document.getElementsByName('kind'));
     constructor() {
         this.elms.forEach(el => el.onchange = _ => showItems());
     }
     getSelected() {
-        return this.elms.find(el => el.checked)?.value ?? 'fishes';
+        return this.elms.filter(el => el.checked).map(el => el.value);
     }
 }();
 
-const timeLabel = new class {
-    elm = document.getElementById('time');
+const datetime = new class {
+    /** @type {HTMLSelectElement} */
+    month = document.getElementById('month');
+    time = document.getElementById('time');
+    constructor() {
+        this.month.onchange = () => this.#onChange();
+        this.time.onchange = () => this.#onChange();
+    }
+    #onChange() {
+        showItems();
+    }
+    enable() {
+        this.month.disabled = false;
+        this.time.disabled = false;
+    }
+    disable() {
+        this.month.disabled = true;
+        this.time.disabled = true;
+    }
     #pad2(n) {
         return String(n).padStart(2, '0');
     }
-    showTime() {
+    setNow() {
         const date = new Date();
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
+        const month = date.getMonth();
+        this.month.selectedIndex = month;
         const hour = this.#pad2(date.getHours());
         const minute = this.#pad2(date.getMinutes());
-        const time = `🗓${month}/${day} ⏰${hour}:${minute}`;
-        this.elm.textContent = time;
+        this.time.value = `${hour}:${minute}`;
+    }
+    get() {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = this.#pad2(parseInt(this.month.selectedOptions[0].value) + 1);
+        const time = this.time.value;
+        return new Date(`${year}-${month}-01 ${time}`);
     }
 }();
 
@@ -34,28 +57,27 @@ const weatherRadios = new class {
     getSelected() {
         return this.elms.find(el => el.checked)?.value ?? 'sunny';
     }
-    enable() {
-        this.elms.forEach(el => el.disabled = false);
-    }
-    disable() {
-        this.elms.forEach(el => el.disabled = true);
-    }
 }();
 
 const nowCheckbox = new class {
     elm = document.getElementById('now');
+
     constructor() {
         this.elm.onchange = _ => {
             if (this.elm.checked) {
-                weatherRadios.enable();
+                datetime.disable();
+                datetime.setNow();
             } else {
-                weatherRadios.disable();
+                datetime.enable();
             }
             showItems();
         };
     }
     isChecked() {
         return this.elm.checked;
+    }
+    uncheck() {
+        this.elm.checked = false;
     }
 }();
 
@@ -76,30 +98,26 @@ const table = new class {
     }
 }
 
-function getData() {
-    const kind = kindRadios.getSelected();
-    const weather = weatherRadios.getSelected();
-    const items = nowCheckbox.isChecked() ? getAllOfNow(kind, weather) : getAll(kind);
-    return items.map(item => [item.name, item.sell, item.location ?? '']);
-}
-
 let showHour;
 
 function showItems() {
-    showHour = new Date().getHours();
-    const data = getData();
-    table.show(data);
+    const kinds = kindChecks.getSelected();
+    const date = datetime.get();
+    const weather = weatherRadios.getSelected();
+    const items = getData(kinds, date, weather).map(item => [item.name, item.sell, item.location ?? '']);
+    table.show(items);
 }
 
 showItems();
 
 setInterval(() => {
-    timeLabel.showTime();
     if (!nowCheckbox.isChecked()) {
         return;    
     }
+    datetime.setNow();
     const hours = new Date().getHours();
     if (hours !== showHour) {
+        showHour = hours;
         showItems();
     }
 }, 1000);
