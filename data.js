@@ -1215,7 +1215,7 @@ const DATA = {
         months: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         times: [1, 1, 1, 1, 1, 1],
         location: '岩・低木',
-        weahter: [0, 1, 0]
+        weather: [0, 1, 0]
     }, {
         name: 'ダンゴムシ',
         sell: 250,
