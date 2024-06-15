@@ -86,11 +86,28 @@ const table = new class {
     grid;
     constructor() {
         this.grid = new gridjs.Grid({
-            columns: ['名前', '値段', '場所'],
+            columns: [{
+                name: '名前',
+                width: '30%'
+            }, {
+                name: '値段',
+                width: '15%'
+            }, {
+                name: '場所',
+                width: '20%'
+            }, {
+                name: 'サイズ',
+                width: '15%'
+            }],
             data: [],
             fixedHeader: true,
             height: this.elm.clientHeight + 'px',
-            sort: true
+            sort: true,
+            style: {
+                td: {
+                    padding: '.8rem'
+                }
+            }
         }).render(this.elm);
     }
     show(data) {
@@ -104,7 +121,7 @@ function showItems() {
     const kinds = kindChecks.getSelected();
     const date = datetime.get();
     const weather = weatherRadios.getSelected();
-    const items = getData(kinds, date, weather).map(item => [item.name, item.sell, item.location ?? '']);
+    const items = getData(kinds, date, weather);
     table.show(items);
 }
 
@@ -112,7 +129,7 @@ showItems();
 
 setInterval(() => {
     if (!nowCheckbox.isChecked()) {
-        return;    
+        return;
     }
     datetime.setNow();
     const hours = new Date().getHours();

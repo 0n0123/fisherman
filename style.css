@@ -50,6 +50,13 @@ option {
     font-size: 1.6rem;
 }
 
-#grid {
+.grid-container {
     flex: 1;
+    overflow: auto;
+    width: 100%;
+}
+
+#grid {
+    height: 100%;
+    width: 50rem;
 }

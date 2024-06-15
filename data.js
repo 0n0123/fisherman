@@ -12,7 +12,13 @@ export function getData(kinds, date, weather) {
         data.push(...items);
     }
     data.sort(sortByName);
-    return JSON.parse(JSON.stringify(data));
+    const ret = JSON.parse(JSON.stringify(data));
+    return ret.map(item => ([
+        item.name,
+        item.sell,
+        item.location ?? '',
+        item.size ?? ''
+    ]));
 }
 
 function sortByName(a, b) {
@@ -56,682 +62,831 @@ const DATA = {
         sell: 900,
         months: [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1],
         times: [1, 1, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'SS'
     }, {
         name: 'オイカワ',
         sell: 200,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [0, 1, 0, 0],
-        location: '川'
+        location: '川',
+        size: 'SS'
     }, {
         name: 'フナ',
         sell: 160,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'S'
     }, {
         name: 'ウグイ',
         sell: 240,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 0, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'M'
     }, {
         name: 'コイ',
         sell: 300,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '池'
+        location: '池',
+        size: 'L'
     }, {
         name: 'ニシキゴイ',
         sell: 4000,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 0, 1, 1],
-        location: '池'
+        location: '池',
+        size: 'L'
     }, {
         name: 'キンギョ',
         sell: 1300,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '池'
+        location: '池',
+        size: 'SS'
     }, {
         name: 'デメキン',
         sell: 1300,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [0, 1, 0, 0],
-        location: '池'
+        location: '池',
+        size: 'SS'
     }, {
         name: 'ランチュウ',
         sell: 4500,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [0, 1, 0, 0],
-        location: '池'
+        location: '池',
+        size: 'S'
     }, {
         name: 'メダカ',
         sell: 300,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '池'
+        location: '池',
+        size: 'SS'
     }, {
         name: 'ザリガニ',
         sell: 200,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '池'
+        location: '池',
+        size: 'S'
     }, {
         name: 'スッポン',
         sell: 3750,
         months: [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
         times: [1, 0, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'L'
     }, {
         name: 'カミツキガメ',
         sell: 5000,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [0, 0, 0, 1],
-        location: '川'
+        location: '川',
+        size: 'L'
     }, {
         name: 'オタマジャクシ',
         sell: 100,
         months: [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '池'
+        location: '池',
+        size: 'SS'
     }, {
         name: 'カエル',
         sell: 120,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '池'
+        location: '池',
+        size: 'S'
     }, {
         name: 'ドンコ',
         sell: 400,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 0, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'S'
     }, {
         name: 'ドジョウ',
         sell: 400,
         months: [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'S'
     }, {
         name: 'ナマズ',
         sell: 800,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [1, 0, 1, 1],
-        location: '池'
+        location: '池',
+        size: 'L'
     }, {
         name: 'ライギョ',
         sell: 5500,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
         times: [0, 1, 0, 0],
-        location: '池'
+        location: '池',
+        size: 'L'
     }, {
         name: 'ブルーギル',
         sell: 180,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [0, 1, 0, 0],
-        location: '川'
+        location: '川',
+        size: 'S'
     }, {
         name: 'イエローパーチ',
         sell: 300,
         months: [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'M'
     }, {
         name: 'ブラックバス',
         sell: 400,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'L'
     }, {
         name: 'ティラピア',
         sell: 800,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0],
         times: [1, 1, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'M'
     }, {
         name: 'パイク',
         sell: 1800,
         months: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'LL'
     }, {
         name: 'ワカサギ',
         sell: 400,
         months: [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         times: [1, 1, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'S'
     }, {
         name: 'アユ',
         sell: 900,
         months: [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'M'
     }, {
         name: 'ヤマメ',
         sell: 1000,
         months: [0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0],
         times: [1, 0, 1, 1],
-        location: '川(崖上)'
+        location: '川(崖上)',
+        size: 'M'
     }, {
         name: 'オオイワナ',
         sell: 3800,
         months: [0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0],
         times: [1, 0, 1, 1],
-        location: '川(崖上)'
+        location: '川(崖上)',
+        size: 'M'
     }, {
         name: 'ゴールデントラウト',
         sell: 15000,
         months: [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0],
         times: [1, 0, 1, 1],
-        location: '川(崖上)'
+        location: '川(崖上)',
+        size: 'M'
     }, {
         name: 'イトウ',
         sell: 15000,
         months: [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         times: [1, 0, 1, 1],
-        location: '川(崖上)'
+        location: '川(崖上)',
+        size: 'LL'
     }, {
         name: 'サケ',
         sell: 700,
         months: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '河口'
+        location: '河口',
+        size: 'L'
     }, {
         name: 'キングサーモン',
         sell: 1800,
         months: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '河口'
+        location: '河口',
+        size: 'LL'
     }, {
         name: 'シャンハイガニ',
         sell: 2000,
         months: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
         times: [1, 0, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'S'
     }, {
         name: 'グッピー',
         sell: 1300,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         times: [0, 1, 0, 0],
-        location: '川'
+        location: '川',
+        size: 'SS'
     }, {
         name: 'ドクターフィッシュ',
         sell: 1500,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
         times: [0, 1, 0, 0],
-        location: '川'
+        location: '川',
+        size: 'SS'
     }, {
         name: 'エンゼルフィッシュ',
         sell: 3000,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [1, 0, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'S'
     }, {
         name: 'ベタ',
         sell: 2500,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [0, 1, 0, 0],
-        location: '川'
+        location: '川',
+        size: 'S'
     }, {
         name: 'ネオンテトラ',
         sell: 500,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         times: [0, 1, 0, 0],
-        location: '川'
+        location: '川',
+        size: 'SS'
     }, {
         name: 'レインボーフィッシュ',
         sell: 800,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [0, 1, 0, 0],
-        location: '川'
+        location: '川',
+        size: 'SS'
     }, {
         name: 'ピラニア',
         sell: 2500,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [0, 1, 0, 1],
-        location: '川'
+        location: '川',
+        size: 'S'
     }, {
         name: 'アロワナ',
         sell: 10000,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 0, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'L'
     }, {
         name: 'ドラド',
         sell: 15000,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 1, 1, 0],
-        location: '川'
+        location: '川',
+        size: 'LL'
     }, {
         name: 'ガー',
         sell: 6000,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 0, 1, 1],
-        location: '池'
+        location: '池',
+        size: 'LL'
     }, {
         name: 'ピラルク',
         sell: 10000,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 0, 1, 1],
-        location: '川'
+        location: '川',
+        size: 'LLL'
     }, {
         name: 'エンドリケリー',
         sell: 4000,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [0, 0, 0, 1],
-        location: '川'
+        location: '川',
+        size: 'L'
     }, {
         name: 'チョウザメ',
         sell: 10000,
         months: [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '河口'
+        location: '河口',
+        size: 'LLL'
     }, {
         name: 'クリオネ',
         sell: 1000,
         months: [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'SS'
     }, {
         name: 'タツノオトシゴ',
         sell: 1100,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'SS'
     }, {
         name: 'クマノミ',
         sell: 650,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'SS'
     }, {
         name: 'ナンヨウハギ',
         sell: 1000,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'S'
     }, {
         name: 'チョウチョウウオ',
         sell: 1000,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'S'
     }, {
         name: 'ナポレオンフィッシュ',
         sell: 10000,
         months: [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
         times: [1, 1, 1, 0],
-        location: '海'
+        location: '海',
+        size: 'LLL'
     }, {
         name: 'ミノカサゴ',
         sell: 500,
         months: [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'M'
     }, {
         name: 'フグ',
         sell: 5000,
         months: [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
         times: [0, 0, 0, 1],
-        location: '海'
+        location: '海',
+        size: 'M'
     }, {
         name: 'ハリセンボン',
         sell: 250,
         months: [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'M'
     }, {
         name: 'アンチョビ',
         sell: 200,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 0],
-        location: '海'
+        location: '海',
+        size: 'S'
     }, {
         name: 'アジ',
         sell: 150,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'S'
     }, {
         name: 'イシダイ',
         sell: 5000,
         months: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'M'
     }, {
         name: 'スズキ',
         sell: 400,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'LL'
     }, {
         name: 'タイ',
         sell: 3000,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'L'
     }, {
         name: 'カレイ',
         sell: 300,
         months: [1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'M'
     }, {
         name: 'ヒラメ',
         sell: 800,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'LL'
     }, {
         name: 'イカ',
         sell: 500,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'M'
     }, {
         name: 'ウツボ',
         sell: 2000,
         months: [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'U'
     }, {
         name: 'ハナヒゲウツボ',
         sell: 600,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'U'
     }, {
         name: 'マグロ',
         sell: 7000,
         months: [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
         times: [1, 1, 1, 1],
-        location: '海(桟橋)'
+        location: '海(桟橋)',
+        size: 'LLL'
     }, {
         name: 'カジキ',
         sell: 10000,
         months: [1, 1, 1, 1, 10, 0, 1, 1, 1, 0, 1, 1],
         times: [1, 1, 1, 1],
-        location: '海(桟橋)'
+        location: '海(桟橋)',
+        size: 'LLL'
     }, {
         name: 'ロウニンアジ',
         sell: 4500,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [1, 1, 1, 1],
-        location: '海(桟橋)'
+        location: '海(桟橋)',
+        size: 'LL'
     }, {
         name: 'シイラ',
         sell: 6000,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
         times: [1, 1, 1, 1],
-        location: '海(桟橋)'
+        location: '海(桟橋)',
+        size: 'LL'
     }, {
         name: 'マンボウ',
         sell: 4000,
         months: [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-        times: [1, 1, 1, 0]
+        times: [1, 1, 1, 0],
+        location: '海',
+        size: 'J'
     }, {
         name: 'エイ',
         sell: 3000,
         months: [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0],
         times: [1, 1, 1, 0],
-        location: '海'
+        location: '海',
+        size: 'LL'
     }, {
         name: 'ノコギリザメ',
         sell: 12000,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 0, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'J'
     }, {
         name: 'シュモクザメ',
         sell: 8000,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 0, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'J'
     }, {
         name: 'サメ',
         sell: 15000,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 0, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'J'
     }, {
         name: 'ジンベエザメ',
         sell: 13000,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'J'
     }, {
         name: 'コバンザメ',
         sell: 1500,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'K'
     }, {
         name: 'チョウチンアンコウ',
         sell: 2500,
         months: [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1],
         times: [1, 0, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'L'
     }, {
         name: 'リュウグウノツカイ',
         sell: 9000,
         months: [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
         times: [1, 1, 1, 1],
-        location: '海'
+        location: '海',
+        size: 'LLL'
     }, {
         name: 'デメニギス',
         sell: 15000,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [0, 0, 0, 1],
-        location: '海'
+        location: '海',
+        size: 'S'
     }, {
         name: 'シーラカンス',
         sell: 15000,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         times: [1, 1, 1, 1],
         location: '海',
-        weather: [0, 1, 0]
+        weather: [0, 1, 0],
+        size: 'LLL'
+    }, {
+        name: 'あきカン',
+        sell: 0,
+        months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        times: [1, 1, 1, 1],
+        location: 'どこでも',
+        size: 'S'
+    }, {
+        name: 'いし',
+        sell: 0,
+        months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        times: [1, 1, 1, 1],
+        location: 'どこでも',
+        size: 'SS'
+    }, {
+        name: 'タイヤ',
+        sell: 0,
+        months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        times: [1, 1, 1, 1],
+        location: 'どこでも',
+        size: 'L'
+    }, {
+        name: 'ながぐつ',
+        sell: 0,
+        months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        times: [1, 1, 1, 1],
+        location: 'どこでも',
+        size: 'M'
     }],
     seabros: [{
         name: 'ワカメ',
         sell: 600,
         months: [1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'L'
     }, {
         name: 'ウミブドウ',
         sell: 900,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'S'
     }, {
         name: 'ナマコ',
         sell: 500,
         months: [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'M'
     }, {
         name: 'センジュナマコ',
         sell: 10000,
         months: [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-        times: [1, 0, 1, 1]
+        times: [1, 0, 1, 1],
+        size: 'S'
     }, {
         name: 'ヒトデ',
         sell: 500,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'S'
     }, {
         name: 'ウニ',
         sell: 1700,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'S'
     }, {
         name: 'パイプウニ',
         sell: 2000,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
-        times: [1, 0, 1, 1]
+        times: [1, 0, 1, 1],
+        size: 'M'
     }, {
         name: 'イソギンチャク',
         sell: 500,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'L'
     }, {
         name: 'ミズクラゲ',
         sell: 600,
         months: [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'S'
     }, {
         name: 'ウミウシ',
         sell: 600,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'SS'
     }, {
         name: 'アコヤガイ',
         sell: 2800,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'S'
     }, {
         name: 'ムールガイ',
         sell: 1500,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'S'
     }, {
         name: 'オイスター',
         sell: 1100,
         months: [1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'S'
     }, {
         name: 'ホタテ',
         sell: 1200,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'M'
     }, {
         name: 'バイガイ',
         sell: 1000,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'S'
     }, {
         name: 'サザエ',
         sell: 1000,
         months: [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'S'
     }, {
         name: 'アワビ',
         sell: 2000,
         months: [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-        times: [1, 0, 1, 1]
+        times: [1, 0, 1, 1],
+        size: 'M'
     }, {
         name: 'オオシャコガイ',
         sell: 15000,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'LL'
     }, {
         name: 'オウムガイ',
         sell: 1800,
         months: [0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0],
-        times: [1, 0, 1, 1]
+        times: [1, 0, 1, 1],
+        size: 'M'
     }, {
         name: 'タコ',
         sell: 1200,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'M'
     }, {
         name: 'メンダコ',
         sell: 6000,
         months: [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'S'
     }, {
         name: 'コウモリダコ',
         sell: 10000,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-        times: [1, 0, 1, 1]
+        times: [1, 0, 1, 1],
+        size: 'M'
     }, {
         name: 'ホタルイカ',
         sell: 1400,
         months: [0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-        times: [0, 0, 0, 1]
+        times: [0, 0, 0, 1],
+        size: 'SS'
     }, {
         name: 'ガザミ',
         sell: 2200,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'M'
     }, {
         name: 'ダンジネスクラブ',
         sell: 1900,
         months: [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'M'
     }, {
         name: 'ズワイガニ',
         sell: 6000,
         months: [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'L'
     }, {
         name: 'タラバガニ',
         sell: 8000,
         months: [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'L'
     }, {
         name: 'フジツボ',
         sell: 600,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'SS'
     }, {
         name: 'タカアシガニ',
         sell: 12000,
         months: [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'LL'
     }, {
         name: 'クルマエビ',
         sell: 3000,
         months: [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
-        times: [1, 0, 1, 1]
+        times: [1, 0, 1, 1],
+        size: 'S'
     }, {
         name: 'アマエビ',
         sell: 1400,
         months: [1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-        times: [1, 0, 1, 1]
+        times: [1, 0, 1, 1],
+        size: 'S'
     }, {
         name: 'シャコ',
         sell: 2500,
         months: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        times: [1, 0, 1, 1]
+        times: [1, 0, 1, 1],
+        size: 'S'
     }, {
         name: 'イセエビ',
         sell: 5000,
         months: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-        times: [0, 0, 0, 1]
+        times: [0, 0, 0, 1],
+        size: 'L'
     }, {
         name: 'ロブスター',
         sell: 4500,
         months: [1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'L'
     }, {
         name: 'ダイオウグソクムシ',
         sell: 12000,
         months: [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
-        times: [0, 1, 0, 1]
+        times: [0, 1, 0, 1],
+        size: 'M'
     }, {
         name: 'カブトガニ',
         sell: 2500,
         months: [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-        times: [0, 0, 0, 1]
+        times: [0, 0, 0, 1],
+        size: 'M'
     }, {
         name: 'ホヤ',
         sell: 1500,
         months: [0, 0, 0, 1, 1, 11, 1, 0, 0, 0, 0],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'S'
     }, {
         name: 'チンアナゴ',
         sell: 1100,
         months: [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
-        times: [1, 1, 1, 0]
+        times: [1, 1, 1, 0],
+        size: 'S'
     }, {
         name: 'ヒラムシ',
         sell: 700,
         months: [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
-        times: [1, 0, 1, 1]
+        times: [1, 0, 1, 1],
+        size: 'SS'
     }, {
         name: 'カイロウドウケツ',
         sell: 5000,
         months: [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-        times: [1, 1, 1, 1]
+        times: [1, 1, 1, 1],
+        size: 'M'
     }],
     bugs: [{
         name: 'モンシロチョウ',
